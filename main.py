@@ -10,13 +10,17 @@ import os
 WORD = "Ghost"
 
 
+def write_entry(path: str) -> None:
+    """Write the single-word entry to *path* (no trailing newline)."""
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        f.write(WORD)
+
+
 def main() -> None:
     os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
-        f.write(WORD)
+    write_entry("/output/entry.txt")
     try:
-        with open("entry.txt", "w", encoding="utf-8", newline="") as f:
-            f.write(WORD)
+        write_entry("entry.txt")
     except OSError:
         pass
 
